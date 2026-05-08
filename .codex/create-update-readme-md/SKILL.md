@@ -1,15 +1,15 @@
 ---
-name: update-readme-features
+name: create-update-readme-features
 description: Use when the task is to write or update the Features section in a README.md file based on existing code, docs, release notes, or user-provided changes. Do not use for general code changes unrelated to README content.
 ---
 
 ## Goal
 
-Create or update the `Features` section of a README so it is accurate, concise, and aligned with the current capabilities of the project.
+Create or update the `Features` section of a README.md so it is accurate, concise, and aligned with the current capabilities of the project.
 
 ## Inputs
 
-- Existing `README.md`
+- Existing `README.md` or new `README.md` if none exists
 - Relevant source files, docs, release notes, changelog entries, or user-provided notes
 - Any repository-specific terminology already used by the project
 
@@ -32,10 +32,10 @@ Create or update the `Features` section of a README so it is accurate, concise, 
 - Keep the section concise.
 - Prefer parallel bullet phrasing.
 - Use the repository’s existing markdown style.
-- If confidence is low for a feature, omit it or explicitly flag uncertainty outside the edited README.
+- If confidence is low for a feature, omit it or explicitly flag uncertainty outside the edited README.md.
 
 ## Do not
 
-- Do not rewrite the whole README unless requested.
+- Do not rewrite the whole README.md unless requested.
 - Do not add roadmap items as shipped features.
 - Do not describe internal refactors as features.
