@@ -89,7 +89,6 @@ If the project explicitly targets more than one platform:
 - Prefer small platform-specific files over large conditional blocks.
 
 Example structure:
-
 ```text
 FeatureName/
 ├── FeatureView.swift
@@ -98,9 +97,7 @@ FeatureName/
 ├── FeaturePlatform+iOS.swift
 └── FeaturePlatform+tvOS.swift
 ```
-
 or:
-
 ```text
 Shared/
 macOS/
@@ -109,7 +106,6 @@ tvOS/
 ```
 
 Use platform checks only when required:
-
 ```swift
 #if os(macOS)
 import AppKit
@@ -174,7 +170,6 @@ Use the section that matches the current project target.
 ### SwiftUI View Files
 
 Use this exact header pattern:
-
 ```swift
 //
 //  Filename.swift
@@ -191,7 +186,6 @@ import SwiftUI
 Use the same comment header, but import only the required modules.
 
 Example:
-
 ```swift
 //
 //  FeatureViewModel.swift
@@ -220,13 +214,11 @@ If build validation is requested:
 - If the scheme is unknown, inspect the project/workspace first.
 
 Examples:
-
 ```bash
 xcodebuild -list
 ```
 
 Platform-specific build commands must match the current project target:
-
 ```bash
 # macOS
 xcodebuild -scheme AppName -destination 'platform=macOS'
@@ -319,7 +311,6 @@ Do not assume these tools exist. If they do not exist, use normal project inspec
 Use `// MARK: -` comments to separate logical sections inside files.
 
 Recommended order for SwiftUI View files:
-
 ```swift
 // MARK: - Properties
 
@@ -335,7 +326,6 @@ Recommended order for SwiftUI View files:
 ```
 
 Recommended order for ViewModel/state files:
-
 ```swift
 // MARK: - Properties
 
@@ -367,7 +357,6 @@ Rules:
 - Prefer one modifier per line when a chain becomes long.
 
 Example:
-
 ```swift
 Text(title)
     .font(.headline)
@@ -426,7 +415,6 @@ Additional property-wrapper rules:
 - For numeric text input, bind `TextField` directly to an `Int`, `Double`, or other numeric value using a `format:` initializer. Add the correct keyboard type for touch platforms, such as `.numberPad` or `.decimalPad`, when applicable.
 
 Good default pattern:
-
 ```swift
 @Observable
 @MainActor
@@ -445,7 +433,6 @@ final class FeatureModel {
 ```
 
 View ownership pattern:
-
 ```swift
 struct FeatureView: View {
     @State private var model = FeatureModel()
@@ -457,7 +444,6 @@ struct FeatureView: View {
 ```
 
 Child binding pattern:
-
 ```swift
 struct FeatureContentView: View {
     @Bindable var model: FeatureModel
@@ -529,7 +515,6 @@ private let cardCornerRadius: CGFloat = 12
 ```
 
 Example only for real multi-platform projects:
-
 ```swift
 #if os(tvOS)
 private let cardCornerRadius: CGFloat = 24
@@ -592,7 +577,6 @@ private let cardCornerRadius: CGFloat = 12
 - Add previews that are useful for the current platform.
 
 Example:
-
 ```swift
 #Preview("Default") {
     FeatureView()
@@ -683,7 +667,6 @@ Additional accessibility rules:
 - Mark async entrypoints clearly.
 
 Example:
-
 ```swift
 func loadData() async {
     do {
@@ -698,7 +681,6 @@ Rules:
 
 - Never use `try?` silently.
 - Either propagate the error, handle it, or annotate clearly:
-
 ```swift
 // INTENTIONAL: best-effort cleanup.
 try? await cleanupTemporaryFiles()
@@ -735,7 +717,6 @@ SwiftData + CloudKit rules, when CloudKit sync is enabled:
 ## Feature Structure Rules
 
 When adding or modifying a feature, prefer this structure:
-
 ```text
 FeatureName/
 ├── FeatureView.swift
@@ -805,14 +786,12 @@ Violation means automatic refactor is required.
 ## Error Handling
 
 - Any screen state owner that can fail must expose:
-
 ```swift
 var error: Error?
 var showError: Bool
 ```
 
 Example:
-
 ```swift
 var showError: Bool {
     error != nil
@@ -825,7 +804,6 @@ var showError: Bool {
 - Keep technical error details out of user-facing text unless the app is a developer tool.
 
 Example:
-
 ```swift
 private var errorBinding: Binding<Bool> {
     Binding(
