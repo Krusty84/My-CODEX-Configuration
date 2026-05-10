@@ -714,19 +714,286 @@ SwiftData + CloudKit rules, when CloudKit sync is enabled:
 
 ---
 
+## Project Structure Rules
+
+Follow the project structure that already exists in the repository. Do not reorganize the project unless the task explicitly asks for a structural refactor.
+
+The preferred default structure for these SwiftUI projects is:
+```text
+ProjectRoot/
+├── AppNameApp.swift                 # SwiftUI App entry point, if this is the project naming style
+├── EntryAppPoint.swift              # Alternative app entry point name, if the project already uses it
+├── MainWindow.swift                 # Main scene/window composition for macOS or window-based apps
+├── Views/
+│   └── FeatureName/
+│       ├── FeatureNameView.swift
+│       ├── FeatureNameViewModel.swift
+│       ├── FeatureNameModel.swift
+│       ├── FeatureNamePreviewData.swift
+│       └── Components/
+│           └── FeatureNameRowView.swift
+├── API/
+│   ├── APIConfig.swift
+│   ├── ServiceNameAPIService.swift
+│   ├── ServiceNameConnector.swift
+│   └── ServiceNameModel.swift
+├── Helpers/
+│   ├── LoggerHelper.swift
+│   └── DomainName/
+│       └── DomainNameParser.swift
+├── DataStorage/
+│   ├── StorageController.swift
+│   ├── DataModel/
+│   │   └── ModelName.xcdatamodeld
+│   └── GeneratedEntity+CoreDataProperties.swift
+└── Project configuration files
+    └── airbnb.swiftformat
+```
+
+Use only the folders and files that are actually needed. Do not create empty folders only because they are listed here.
+
+---
+
+## Root-Level Files
+
+Keep root-level Swift files limited to application composition and project entry points.
+
+Allowed at project root:
+
+- `AppNameApp.swift` when the project uses the standard SwiftUI app entry naming style.
+- `EntryAppPoint.swift` when the project already uses this name for the SwiftUI app entry point.
+- `MainWindow.swift` for the main window, scene, or top-level app shell.
+- Project-level configuration files, such as `airbnb.swiftformat`.
+
+Rules:
+
+- Do not put feature screens directly in the root folder.
+- Do not put networking, parsers, persistence controllers, or reusable helpers in the root folder.
+- Do not rename an existing app entry point only to satisfy a generic convention.
+- If the project already uses `HAMBoardApp.swift`, `yaControlApp.swift`, `EntryAppPoint.swift`, or another clear app entry name, keep that naming style.
+- `MainWindow.swift` may compose high-level app navigation, but it must not contain feature business logic.
+
+---
+
+## Views Folder Rules
+
+Place SwiftUI screens and their UI-facing state owners under `Views/<FeatureName>/`.
+
+Preferred structure:
+```text
+Views/
+└── FeatureName/
+    ├── FeatureNameView.swift
+    ├── FeatureNameViewModel.swift
+    ├── FeatureNameModel.swift
+    ├── FeatureNamePreviewData.swift
+    └── Components/
+        ├── FeatureNameRowView.swift
+        └── FeatureNameToolbarView.swift
+```
+
+Examples:
+```text
+Views/CloudStorage/CloudStorageView.swift
+Views/CloudStorage/CloudStorageViewModel.swift
+
+Views/Clock/ClockView.swift
+Views/Clock/ClockViewModel.swift
+
+Views/PushToTeamcenter/PushToTeamcenterView.swift
+Views/PushToTeamcenter/PushToTeamcenterViewModel.swift
+```
+
+Rules:
+
+- Use `Views/<FeatureName>/` as the default place for feature screens.
+- Keep `FeatureNameView.swift` focused on rendering, composition, and bindings.
+- Keep `FeatureNameViewModel.swift` in the same feature folder when it is tightly coupled to that screen.
+- Put small subviews in the same feature folder when there are only one or two.
+- Create `Views/<FeatureName>/Components/` only when the feature has several reusable local subviews.
+- Do not create a root-level `FeatureName/` folder for SwiftUI screens unless the repository already uses that style.
+- Do not put API services, Core Data controllers, file-system utilities, or general helpers inside `Views/`.
+- Do not create a `ViewModels/` top-level folder unless the current project already uses that convention.
+
+Small screen:
+```text
+Views/FeatureName/FeatureNameView.swift
+```
+
+Screen with state:
+```text
+Views/FeatureName/FeatureNameView.swift
+Views/FeatureName/FeatureNameViewModel.swift
+```
+
+Screen with local UI model and preview data:
+```text
+Views/FeatureName/FeatureNameView.swift
+Views/FeatureName/FeatureNameViewModel.swift
+Views/FeatureName/FeatureNameModel.swift
+Views/FeatureName/FeatureNamePreviewData.swift
+```
+
+---
+
+## API Folder Rules
+
+Place networking, external service integration, protocol/API models, and external connectors under `API/`.
+
+Preferred structure:
+```text
+API/
+├── APIConfig.swift
+├── ServiceNameAPIService.swift
+├── ServiceNameConnector.swift
+├── ServiceNameModel.swift
+└── ServiceNameRequest.swift
+```
+
+Examples:
+```text
+API/YandexAPIService.swift
+API/DXClusterTelnetConnector.swift
+API/APIConfig.swift
+API/TeamcenterAPIService.swift
+API/TeamcenterModel.swift
+```
+
+Rules:
+
+- Use `API/` for code that talks to external systems, web services, telnet services, Teamcenter, Yandex, LLM providers, or similar integrations.
+- Use `APIConfig.swift` for non-secret endpoint configuration, feature flags, base URLs, request defaults, and similar API configuration.
+- Keep secrets, passwords, tokens, certificates, and private API keys out of the repository.
+- Use Keychain or the project’s approved secure storage layer for credentials and tokens.
+- Keep raw request/response DTOs near the service that owns them when they are API-specific.
+- Use clear names such as `TeamcenterAPIService`, `YandexAPIService`, or `DXClusterTelnetConnector`.
+- Do not put API services inside `Views/<FeatureName>/` even if only one screen currently uses them.
+- Do not put UI state, SwiftUI views, or window composition code inside `API/`.
+
+---
+
+## Helpers Folder Rules
+
+Place reusable utilities, pure helpers, parsers, formatters, caches, adapters, and small domain utility code under `Helpers/`.
+
+Preferred structure:
+```text
+Helpers/
+├── LoggerHelper.swift
+├── QRCodeCache.swift
+├── LLMHelpers.swift
+├── TCHelpers.swift
+└── DomainName/
+    └── DomainNameParser.swift
+```
+
+Examples:
+```text
+Helpers/LoggerHelper.swift
+Helpers/QRCodeCache.swift
+Helpers/DXCluster/DXClusterParser.swift
+Helpers/LLMHelpers.swift
+Helpers/TCHelpers.swift
+```
+
+Rules:
+
+- Use `Helpers/` for code that is reusable and not owned by one specific View.
+- Create `Helpers/<DomainName>/` when a helper area has several related files or a clear domain boundary.
+- Keep parser code in `Helpers/<DomainName>/` unless it is part of an external API integration and clearly belongs in `API/`.
+- Keep helpers mostly pure and easy to test.
+- Do not hide business workflows in generic helper files.
+- Do not create vague dumping-ground files such as `Utils.swift`, `Common.swift`, or `Misc.swift`.
+- Use specific names such as `LoggerHelper`, `QRCodeCache`, `DXClusterParser`, `LLMHelpers`, or `TCHelpers`.
+- If a helper grows into a service with state, side effects, networking, persistence, or lifecycle rules, move it to the appropriate folder and rename it clearly.
+
+---
+
+## DataStorage Folder Rules
+
+Place local persistence, Core Data, SwiftData, storage controllers, migrations, and generated persistence types under `DataStorage/`.
+
+Preferred structure:
+```text
+DataStorage/
+├── StorageController.swift
+├── DataModel/
+│   └── HistoryData.xcdatamodeld
+├── GeneratedBOMDataByLLM+CoreDataClass.swift
+├── GeneratedBOMDataByLLM+CoreDataProperties.swift
+├── GeneratedItemsDataByLLM+CoreDataClass.swift
+└── GeneratedItemsDataByLLM+CoreDataProperties.swift
+```
+
+Example:
+```text
+DataStorage/DataModel/HistoryData.xcdatamodeld/HistoryData.xcdatamodel/contents
+DataStorage/GeneratedBOMDataByLLM+CoreDataClass.swift
+DataStorage/GeneratedItemsDataByLLM+CoreDataProperties.swift
+DataStorage/StorageController.swift
+```
+
+Rules:
+
+- Use `DataStorage/` for local storage infrastructure.
+- Keep `.xcdatamodeld` packages under `DataStorage/DataModel/`.
+- Keep generated Core Data classes and properties under `DataStorage/` unless Xcode/project settings require another location.
+- Keep `StorageController.swift` or equivalent persistence stack code under `DataStorage/`.
+- Keep persistence out of View files.
+- Keep API networking out of `DataStorage/` unless the file is explicitly a sync layer between API and persistence.
+- Do not put screen-specific ViewModels inside `DataStorage/`.
+- Use SwiftData for new persistence only when deployment targets and project direction support it.
+- Use Core Data when the project already uses Core Data, requires migrations, or must preserve an existing `.xcdatamodeld` model.
+
+---
+
 ## Feature Structure Rules
 
-When adding or modifying a feature, prefer this structure:
+When adding or modifying a feature, use the existing folder style first. For these projects, the default feature location is usually `Views/<FeatureName>/`, not a root-level `FeatureName/` folder.
+
+Use this default structure for a SwiftUI screen feature:
 ```text
-FeatureName/
-├── FeatureView.swift
-├── FeatureModel.swift
-├── FeatureViewModel.swift
-├── FeatureService.swift
-└── FeaturePreviewData.swift
+Views/FeatureName/
+├── FeatureNameView.swift
+├── FeatureNameViewModel.swift
+├── FeatureNameModel.swift
+├── FeatureNamePreviewData.swift
+└── Components/
+    └── FeatureNameSubView.swift
 ```
 
 Use only the files that are actually needed.
+
+Rules:
+
+1. Small/simple screen:
+   - `Views/FeatureName/FeatureNameView.swift`
+
+2. Screen with UI state or async loading:
+   - `Views/FeatureName/FeatureNameView.swift`
+   - `Views/FeatureName/FeatureNameViewModel.swift`
+
+3. Screen with external API access:
+   - `Views/FeatureName/FeatureNameView.swift`
+   - `Views/FeatureName/FeatureNameViewModel.swift`
+   - `API/ServiceNameAPIService.swift`
+   - optional `API/ServiceNameModel.swift`
+
+4. Screen with local persistence:
+   - `Views/FeatureName/FeatureNameView.swift`
+   - `Views/FeatureName/FeatureNameViewModel.swift`
+   - `DataStorage/StorageController.swift` or existing storage service
+   - Core Data or SwiftData model files under `DataStorage/`
+
+5. Screen with parsing, caching, or reusable technical support:
+   - `Views/FeatureName/FeatureNameView.swift`
+   - `Views/FeatureName/FeatureNameViewModel.swift`
+   - helper code under `Helpers/` or `Helpers/<DomainName>/`
+
+6. Platform-specific feature behavior:
+   - use the native solution for the current platform
+   - isolate platform-specific code when it improves readability
+   - avoid cross-platform structure unless the project is multi-platform
 
 Additional structure rules:
 
@@ -737,24 +1004,9 @@ Additional structure rules:
 - Use Keychain or an approved secure storage layer for credentials and tokens; never use `@AppStorage` for sensitive values.
 - Add comments and documentation comments only when they explain non-obvious behavior, public API, or project-specific decisions.
 - If SwiftLint is configured, leave the project with zero SwiftLint warnings or errors unless the task explicitly allows otherwise.
-
-Rules:
-
-1. Small/simple screen:
-   - `FeatureView.swift`
-   - optional `FeatureModel.swift`
-
-2. Complex screen:
-   - `FeatureView.swift`
-   - `FeatureViewModel.swift`
-   - optional service/repository files
-
-3. Platform-specific feature behavior:
-   - use the native solution for the current platform
-   - isolate platform-specific code when it improves readability
-   - avoid cross-platform structure unless the project is multi-platform
-
-Do not create unnecessary layers.
+- Do not create unnecessary layers.
+- Do not move files only for cosmetic reasons.
+- If a file is already in a reasonable project-specific location, keep it there unless the task explicitly requires reorganization.
 
 ---
 
@@ -776,8 +1028,12 @@ When adding or modifying a View:
    - more than 80 lines of non-UI logic
 7. Keep View code focused on rendering, composition, and bindings.
 8. Move business rules to the state owner.
-9. Use a feature folder that contains related files.
-10. Do not make the code multi-platform unless the project actually requires it.
+9. Place the View and its tightly coupled ViewModel under `Views/<FeatureName>/`.
+10. Place external service integration under `API/`.
+11. Place reusable utilities, parsers, caches, and helpers under `Helpers/`.
+12. Place local persistence and generated storage files under `DataStorage/`.
+13. Keep root-level Swift files limited to app entry points and top-level window/scene composition.
+14. Do not make the code multi-platform unless the project actually requires it.
 
 Violation means automatic refactor is required.
 
