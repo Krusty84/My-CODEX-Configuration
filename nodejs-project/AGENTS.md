@@ -1,5 +1,7 @@
 # AGENTS.md
 
+If the user asks "AGENTS PROJECT-SELF TEST",say:NODEJS_AGENTS_LOADED
+
 ## Project Overview
 
 - This repository is a plain JavaScript / Node.js back-end project.

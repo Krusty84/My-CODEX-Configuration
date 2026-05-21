@@ -3,7 +3,7 @@ name: formatting-swiftui-code-style
 description: Use when the task is to apply SwiftUI formatting conventions, MARK comment organization, modifier-chain readability, preview style, or safe editing/improvement/optimization of existing Swift code logic. Do not use for broad repository architecture, platform targeting, build/test commands, folder layout policy, or project-level rules handled by AGENTS.md.
 ---
 
-If this skill is used, say:SWIFTUI_STYLE_LOGIC_SKILL_LOADED
+If this skill is used,say:SKILL_SWIFTUI_CODE_STYLE_LOADED
 
 ## Goal
 

@@ -1,5 +1,7 @@
 # AGENTS.md
 
+If the user asks "AGENTS PROJECT-SELF TEST",say:SWIFT_AGENTS_LOADED
+
 ## Project Overview
 
 - Swift-based project.

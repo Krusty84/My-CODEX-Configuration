@@ -1,5 +1,7 @@
 # AGENTS.md
 
+If the user asks "AGENTS PROJECT-SELF TEST",say:OBSIDIAN_DEV_AGENTS_LOADED
+
 ## Project Overview
 
 This repository is an Obsidian community plugin project.

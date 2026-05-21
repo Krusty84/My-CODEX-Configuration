@@ -3,7 +3,7 @@ name: create-update-readme-features
 description: Use when the task is to write or update the Features section in a README.md file based on existing code, docs, release notes, or user-provided changes. Do not use for general code changes unrelated to README content.
 ---
 
-If this skill is used, say:SKILL_CR_UPD_README_LOADED
+If this skill is used,say:SKILL_CR_UPD_README_LOADED
 
 ## Goal
 

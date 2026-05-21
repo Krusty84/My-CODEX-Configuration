@@ -3,7 +3,7 @@ name: create-update-architecture-doc
 description: Use when the task is to create or update an ARCHITECTURE.md document that explains system structure, key modules, data flow, and major technical decisions. Do not use for lightweight README edits or changelog work.
 ---
 
-If this skill is used, say:SKILL_CR_UPD_ARCH_LOADED
+If this skill is used,say:SKILL_CR_UPD_ARCH_LOADED
 
 ## Goal
 

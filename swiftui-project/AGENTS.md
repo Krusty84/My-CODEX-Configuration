@@ -1,6 +1,6 @@
 # AGENTS.md
 
-If the user asks "AGENTS PROJECT-SELF TEST", say exactly: `SWIFTUI_AGENTS_LOADED`.
+If the user asks "AGENTS PROJECT-SELF TEST",say:SWIFTUI_AGENTS_LOADED
 
 ## Scope
 
