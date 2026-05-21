@@ -1,5 +1,7 @@
 ## 1. Think Before Coding
 
+If the user asks "AGENTS SELF TEST",say:GLOBAL_AGENTS_LOADED
+
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
