@@ -5,7 +5,7 @@ My `AGENTS.md` and `SKILL.md` files provide global agent behavior rules, reusabl
 ## Contents
 
 | Path | Purpose |
-| --- | --- |
+| ------ | --- |
 | `.codex/AGENTS.md` | Global agent rules for careful reasoning, small changes, and verification. |
 | `.codex/create-update-architecture-md/SKILL.md` | Skill for creating or updating `ARCHITECTURE.md`. |
 | `.codex/create-update-readme-md/SKILL.md` | Skill for creating or updating README feature sections. |
@@ -17,12 +17,10 @@ My `AGENTS.md` and `SKILL.md` files provide global agent behavior rules, reusabl
 
 ## How to use
 
-Copy the files you need into your target project.
-
 For global Codex rules and reusable skills:
 
 ```text
-Your_Profile_Folder/
+In_Your_OS_Your_Profile_Folder/
 └── .codex/
     ├── AGENTS.md
     └── skills/
@@ -58,7 +56,7 @@ Use these prompts to confirm that the expected instructions are loaded.
 ### Skills
 
 | Skill | Loaded marker |
-| --- | --- |
+| ----- | ------- |
 | Create / update architecture document | `SKILL_CR_UPD_ARCH_LOADED` |
 | Create / update README features | `SKILL_CR_UPD_README_LOADED` |
 | SwiftUI code style | `SKILL_SWIFTUI_CODE_STYLE_LOADED` |
