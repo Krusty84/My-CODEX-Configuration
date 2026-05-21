@@ -61,6 +61,11 @@ Use these prompts to confirm that the expected instructions are loaded.
 | Create / update README features | `SKILL_CR_UPD_README_LOADED` |
 | SwiftUI code style | `SKILL_SWIFTUI_CODE_STYLE_LOADED` |
 
+## Codex agent limits
+Codex has limit (32 KiB by default) of the combined instruction-file size, look at the official Codex documentation for details:
+https://developers.openai.com/codex/guides/agents-md
+Pay attention at this parameter: `project_doc_max_bytes`
+
 ## Credits
 
 The global file `.codex/AGENTS.md` is effectively a 1:1 copy of `CLAUDE.md` by Andrei Karpathy.
