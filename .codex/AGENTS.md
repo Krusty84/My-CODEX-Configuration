@@ -1,6 +1,6 @@
 ## 1. Think Before Coding
 
-If the user asks "AGENTS SELF TEST",say:GLOBAL_AGENTS_LOADED
+If the user asks "AGENTS GLOBAL-SELF TEST",say:GLOBAL_AGENTS_LOADED
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
