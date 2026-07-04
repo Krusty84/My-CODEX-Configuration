@@ -1,5 +1,3 @@
-# AGENTS.md
-
 If the user asks "AGENTS PROJECT-SELF TEST",say:OBSIDIAN_DEV_AGENTS_LOADED
 
 ## Project Overview
@@ -248,7 +246,7 @@ interface PluginSettings {
 
 const DEFAULT_SETTINGS: PluginSettings = {
   schemaVersion: 1,
-  enableFeature: true
+  enableFeature: true,
 };
 ```
 

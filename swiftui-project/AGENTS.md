@@ -1,5 +1,3 @@
-# AGENTS.md
-
 If the user asks "AGENTS PROJECT-SELF TEST",say:SWIFTUI_AGENTS_LOADED
 
 ## Scope

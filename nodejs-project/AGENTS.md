@@ -1,5 +1,3 @@
-# AGENTS.md
-
 If the user asks "AGENTS PROJECT-SELF TEST",say:NODEJS_AGENTS_LOADED
 
 ## Project Overview
@@ -36,6 +34,7 @@ You must:
 ## Core Principle
 
 The main goal is a maintainable Node.js back-end with clear boundaries:
+
 ```text
 main.js -> src/app.js -> routes -> controllers -> services -> models / external clients
 ```
@@ -101,10 +100,13 @@ Use these rules for Express server code.
 - If no async wrapper exists, create a small reusable wrapper or use explicit `try/catch` in controllers.
 
 Preferred request flow:
+
 ```text
 route -> validation middleware -> controller -> service -> response
 ```
+
 Preferred success response:
+
 ```json
 {
   "success": true,
@@ -113,6 +115,7 @@ Preferred success response:
 ```
 
 Preferred error response:
+
 ```json
 {
   "success": false,
@@ -161,6 +164,7 @@ For new files, prefer no header unless one of these is true:
 - The file has important operational constraints.
 
 Acceptable lightweight script header:
+
 ```js
 #!/usr/bin/env node
 
@@ -182,6 +186,7 @@ Rules:
 Use `npm` by default.
 
 Common commands to inspect in `package.json`:
+
 ```bash
 npm install
 npm start
@@ -245,6 +250,7 @@ Rules:
 JavaScript has no `MARK` comments like Swift. Use lightweight section comments only when they improve navigation.
 
 Allowed examples:
+
 ```js
 // Configuration
 // Routes
@@ -291,6 +297,7 @@ This project is plain JavaScript, so use clear data shapes and JSDoc instead of 
 - Avoid runtime type checks added only for documentation purposes.
 
 Example:
+
 ```js
 /**
  * @typedef {Object} ApiResult
@@ -337,6 +344,7 @@ Rules:
 ### 1. General Architecture
 
 Preferred structure for new or reorganized Node.js back-end projects:
+
 ```text
 project-root/
   main.js
@@ -387,6 +395,7 @@ Rules:
 ### 3. Small Project Structure
 
 For small projects, keep the structure simple but still separated:
+
 ```text
 project-root/
   main.js
@@ -483,17 +492,17 @@ Rules:
 Preferred Axios client pattern:
 
 ```js
-const axios = require('axios')
-const { loadConfig } = require('../config/loadConfig')
+const axios = require("axios");
+const { loadConfig } = require("../config/loadConfig");
 
-const config = loadConfig()
+const config = loadConfig();
 
 const apiClient = axios.create({
   baseURL: config.ExternalApi.baseUrl,
-  timeout: config.ExternalApi.timeoutMs || 15000
-})
+  timeout: config.ExternalApi.timeoutMs || 15000,
+});
 
-module.exports = { apiClient }
+module.exports = { apiClient };
 ```
 
 ## Persistence and File-System Rules

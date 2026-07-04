@@ -1,5 +1,3 @@
-# AGENTS.md
-
 If the user asks "AGENTS PROJECT-SELF TEST",say:SWIFT_AGENTS_LOADED
 
 ## Project Overview
@@ -132,12 +130,15 @@ Use this header pattern unless the project already has a different required head
 Import only the modules required by the file.
 
 Examples:
+
 ```swift
 import Foundation
 ```
+
 ```swift
 import ArgumentParser
 ```
+
 ```swift
 import XCTest
 @testable import ProjectName
@@ -160,6 +161,7 @@ If validation is requested, inspect the project first and use the correct tool.
 ### Swift Package Manager
 
 Common commands:
+
 ```bash
 swift package describe
 swift build
@@ -167,6 +169,7 @@ swift test
 ```
 
 For stricter validation when appropriate:
+
 ```bash
 swift build -Xswiftc -warnings-as-errors
 swift test --parallel
@@ -179,11 +182,13 @@ Do not assume warnings-as-errors is safe for the project unless requested or alr
 Use Xcode project commands only when the project is Xcode-based.
 
 Inspect schemes first:
+
 ```bash
 xcodebuild -list
 ```
 
 Examples:
+
 ```bash
 # macOS
 xcodebuild -scheme AppName -destination 'platform=macOS'
@@ -247,6 +252,7 @@ Do not assume these tools exist. If they do not exist, use normal project inspec
 Use `// MARK: -` comments to separate logical sections inside files.
 
 Recommended order for production files:
+
 ```swift
 // MARK: - Properties
 
@@ -262,6 +268,7 @@ Recommended order for production files:
 ```
 
 Recommended order for test files:
+
 ```swift
 // MARK: - Tests
 
@@ -290,6 +297,7 @@ Rules:
 - Prefer one chained call per line when the chain becomes long.
 
 Example:
+
 ```swift
 let activeUsers = users
     .filter(\.isActive)
@@ -509,6 +517,7 @@ Do not create files that are not needed.
 - Avoid mixing GCD and Swift concurrency without a clear bridge reason.
 
 Example:
+
 ```swift
 actor TokenStore {
     private var token: String?
@@ -696,6 +705,7 @@ private let logger = Logger(subsystem: "com.example.project", category: "Import"
 - Do not over-mock. Use simple fakes/stubs where they are clearer.
 
 Example test naming style:
+
 ```swift
 func testParse_whenInputIsEmpty_returnsEmptyResult() throws {
     // Test body.
