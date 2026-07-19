@@ -1,5 +1,5 @@
 ---
-name: create-update-architecture-doc
+name: create-update-architecture-md
 description: Use when the task is to create or update an ARCHITECTURE.md document that explains system structure, key modules, data flow, and major technical decisions. Do not use for lightweight README edits or changelog work.
 ---
 
@@ -42,6 +42,7 @@ When appropriate, include these sections:
 ## Output rules
 
 - Write for engineers new to the repo.
+- Use references to code files and modules where possible.
 - Prefer short sections and clear headings.
 - Use diagrams only if explicitly requested.
 - Preserve existing terminology and naming.

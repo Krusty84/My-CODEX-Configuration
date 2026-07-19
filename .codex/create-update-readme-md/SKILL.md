@@ -1,5 +1,5 @@
 ---
-name: create-update-readme-features
+name: create-update-readme-md
 description: Use when the task is to write or update the Features section in a README.md file based on existing code, docs, release notes, or user-provided changes. Do not use for general code changes unrelated to README content.
 ---
 
