@@ -32,6 +32,7 @@ Create or update the `Features` section of a README.md so it is accurate, concis
 ## Output rules
 
 - Keep the section concise.
+- Write in ASD-STE100. Be so brief every word you write costs you $1,000.
 - Prefer parallel bullet phrasing.
 - Use the repository’s existing markdown style.
 - If confidence is low for a feature, omit it or explicitly flag uncertainty outside the edited README.md.
