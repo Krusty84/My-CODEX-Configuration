@@ -2,7 +2,7 @@ If the user asks "AGENTS GLOBAL-SELF TEST",say:GLOBAL_AGENTS_LOADED
 
 ## 1. Think Before Coding
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+**Don't assume. Don't hide confusion. Surface tradeoffs. Write in ASD-STE100. Be so brief every word you write costs you $1,000.**
 
 Before implementing:
 
