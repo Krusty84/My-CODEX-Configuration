@@ -42,6 +42,7 @@ When appropriate, include these sections:
 ## Output rules
 
 - Write for engineers new to the repo.
+- Write in ASD-STE100. Be so brief every word you write costs you $1,000.
 - Use references to code files and modules where possible.
 - Prefer short sections and clear headings.
 - Use diagrams only if explicitly requested.
